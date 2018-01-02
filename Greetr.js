@@ -1,5 +1,5 @@
 // Use IIFE to safely isolate the code
-(function(global, $) {
+;(function(global, $) {
     var Greetr = function(firstname, lastname, language) {
         return new Greetr.init(firstname, lastname, language);
     };
@@ -69,6 +69,27 @@
                 this.language = newLang;
             }
             
+            return this;
+        },
+
+        HTMLGreeting: function(selector, formal) {
+            if (!$) {
+                throw "JQuery not loaded";
+            }
+
+            if (!selector) {
+                throw "Missing jQuery selector";
+            }
+
+            var msg;
+            if (formal) {
+                msg = this.formalGreeting();
+            } else {
+                msg = this.greeting();
+            }
+
+            $(selector).html(msg);
+
             return this;
         }
     };
